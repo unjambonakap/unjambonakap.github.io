@@ -1,0 +1,11 @@
+---
+layout: post
+title:  "1"
+date:   2018-10-17 22:45:55 +0200
+---
+Hello all,
+Not very often I end up doing things that may be interesting.
+Instead of rotting offline, I'll try to share them here.
+
+Plus it might encourage people to checkout the github. I don't know yet if old stuff will be talked about but there might be useful code waiting to be dug (deep in a pile of broken shit for sure).
+
