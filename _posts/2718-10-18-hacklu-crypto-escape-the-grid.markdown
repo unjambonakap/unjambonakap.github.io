@@ -4,8 +4,8 @@ title:  "hacklu 2018 - Crypto Hard - Escape the grid"
 date:   2018-10-18
 ---
 
-[The challenge](https://arcade.fluxfingers.net/challenges/10), [backup](https://github.com/unjambonakap/ctf/tree/master/hacklu/18/crypto/escape_the_grip)
-In case the challenge server is down, some pseudo python code can be seen [below](#resources).
+The challenge can be found [here](https://arcade.fluxfingers.net/challenges/10) or [there](https://github.com/unjambonakap/ctf/tree/master/hacklu/18/crypto/escape_the_grip).  
+In case the challenge server is brought down, some pseudo python code of the challenge server can be found [below](#resources).
 
 ## Intro
 
