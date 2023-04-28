@@ -30,7 +30,6 @@ kramdown:
   syntax_highlighter: rouge
 theme: minima
 plugins:
-  - jekyll-feed
 
 highlighter: rouge
 # Exclude from processing.

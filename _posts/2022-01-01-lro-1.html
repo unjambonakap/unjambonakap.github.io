@@ -1,5 +1,5 @@
 ---
-title:  "Astreology - Using NASA's data for space archeologty"
+title:  "Astreology - Using NASA's data for space archeology"
 categories: space data algorithm
 excerpt: "Recreating space pictures from scratch with data available online"
 date: 2022-01-01
@@ -342,14 +342,14 @@ Note: This is a pandoc generated html file (subfloat not handled well :/). Origi
 <p>The model for the moon is a lot more tricky than the earth’s, as we are close enough to the moon on the earthrise pictures for elevation to matter.</p>
 <p>For starters I used the texture on image <a href="#img:moon_basic_texture" data-reference-type="ref" data-reference="img:moon_basic_texture">2</a> which is a cylindrical projection in the mean Earth/polar axis (ME) frame, considering the moon as a sphere with a radius of 1737.4 km.</p>
 <figure id="img:moon_basic_texture">
-<img src="./data/Moon_LRO_LOLA_global_LDEM_1024.jpg" style="width:80.0%" />
+<img src="/assets/lro/data/Moon_LRO_LOLA_global_LDEM_1024.jpg" style="width:80.0%" />
 <figcaption aria-hidden="true"></figcaption>
 </figure>
 <p>With a variation of about 18km of the elevation in this spherical model (and this low resolution), we need better data very early on.</p>
 <p>For points far from the poles (max latitude of 60 degrees) the dataset SLDEM2015 <span class="citation" data-cites="bib_SLDEM2015"></span> provides an effective resolution of around 60m at the equator, with <span class="math inline">\(\sim 4m\)</span> of vertical accuracy. The dataset can be downloaded at <a href="http://imbrium.mit.edu/DATA/SLDEM2015/TILES/JP2/" class="uri">http://imbrium.mit.edu/DATA/SLDEM2015/TILES/JP2/</a>. Data comes as tiles (for example, has 512pixel/deg, 30 degrees of lat, 45 of lon,  170MB and 345 millions pixels per tile).</p>
 <p>The figure <a href="#img:moon_dem_tiles" data-reference-type="ref" data-reference="img:moon_dem_tiles">3</a> shows how the tiles represent the moon.</p>
 <figure id="img:moon_dem_tiles">
-<img src="./data/moon_dem_tiles.png" style="width:60.0%" />
+<img src="/assets/lro/data/moon_dem_tiles.png" style="width:60.0%" />
 <figcaption>Plotting DEM tiles on the basic moon texture</figcaption>
 </figure>
 <p>From elevation data, it is straightforward to create a 3d mesh using python: each pixel is mapped to an XYZ coordinate and 2x2 pixel square is used to generate two triangles.</p>
@@ -358,7 +358,7 @@ Note: This is a pandoc generated html file (subfloat not handled well :/). Origi
 <p>To render the scene, only the data in the camera viewbox are useful. An easy heuristic to know if a point is visible is if its coordinates in the clip space are in <span class="math inline">\([-1,1]^3\)</span>. Once the field of view defined, we have <span class="math inline">\(pos_{clip} = Mat_{perspective}(fov) \times Mat_{world2local,camera} \times pos_{world}\)</span>.</p>
 <p>We can start using points from a simple model of the moon (spherical), project them to get an idea of the visible region. We can then use only points from the tiles that are close to this region (and potentially repeat the process using this new points to get a better estimation of the visible scene). This process is visible on the image <a href="#img:moon_lro_viewport" data-reference-type="ref" data-reference="img:moon_lro_viewport">4</a>.</p>
 <figure id="img:moon_lro_viewport">
-<img src="./data/moon_lro_viewport.png" style="width:80.0%" />
+<img src="/assets/lro/data/moon_lro_viewport.png" style="width:80.0%" />
 <figcaption>Visible area of the moon and backface information. Camera is the green point</figcaption>
 </figure>
 <p>Another possible optimization is to cull points whose normal do not point toward the camera (backface culling). This process is shown in the previous figure, with the visible region delimited by the red polygon.</p>
@@ -404,7 +404,7 @@ Note: This is a pandoc generated html file (subfloat not handled well :/). Origi
 <h1 id="case-studies">Case studies</h1>
 <h2 id="lros-earthrise">LRO’s Earthrise</h2>
 <figure id="img:earthrise_lro_reminder">
-<img src="./data/earth_moon_lro.jpg" style="width:60.0%" />
+<img src="/assets/lro/data/earth_moon_lro.jpg" style="width:60.0%" />
 <figcaption>Trying to reproduce this LRO earthrise</figcaption>
 </figure>
 <p>Lack of web search early on made me miss an important information: the "exact" time at which the photo is taken. Indeed, the LROC team has a website with a welld documented making of for this photo (<a href="http://lroc.sese.asu.edu/posts/895" class="uri">http://lroc.sese.asu.edu/posts/895</a>). Notably, it specifies that the sequence (because the photo is built overtime) starts on 12:18:17.384 UTC, Oct 12 2015. That would have been a nice help as the original page only mention the day. Next section is about that, this useless effort to recover a more precise date of the picture.</p>
@@ -412,7 +412,7 @@ Note: This is a pandoc generated html file (subfloat not handled well :/). Origi
 <p>The starting point is a simple 12th of October, 2015, without a time zone. Disregarding the moon, we can expect a window of no more than a couple of hour per day where Africa and South America are both entirely visible from the spacecraft. Pinpointing this two hour window only requires getting the position of the spacecraft in the earth frame, and rendering the scene with the camera pointed directly at the earth. 48 pictures where generated for this day and checked manually to identify the correct window (see the figure <a href="#img:lro_earth_rotation" data-reference-type="ref" data-reference="img:lro_earth_rotation">6</a>).</p>
 <p>From these pictures, we can say that the pictures was generated between 11:44 and 13:15 (yeah, for linspace endpoints defaults to True).</p>
 <figure id="img:lro_earth_rotation">
-<img src="./data/lro_pinpoint_earth_rotation.png" style="width:80.0%" />
+<img src="/assets/lro/data/lro_pinpoint_earth_rotation.png" style="width:80.0%" />
 <figcaption>Identifying a two-hour window using the visible face of the earth</figcaption>
 </figure>
 <p>Additionally, the page mentions that the spacecraft experiences 12 earthrises a day i.e on every two hours. We’re in luck, only one of these earthrise will fall in our two-hour window we just identified. At this point, I was not retrieving the camera orientation from Spice. Thus, for rendering, the camera was centered on the earth. I also used the basic spherical model of the moon.</p>
