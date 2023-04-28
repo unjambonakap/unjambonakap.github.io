@@ -4,10 +4,4 @@ title: About
 permalink: /about/
 ---
 
-Know how to talk to myself better than to the screen. Kapa.
-
-If I'm not busy I might enjoy interesting discussions and challenges.
-No spam plz.
-
-
-
+Few things I've worked on at some point and put effort into. For my own benefit (or who knows, someone will find it interesting) - it makes me feel better to do a brain dump instead of just forgetting what I've done a couple of months afterward.
